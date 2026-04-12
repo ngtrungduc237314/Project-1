@@ -1,0 +1,6 @@
+crim
+zn
+indus
+chas
+nox
+rm
