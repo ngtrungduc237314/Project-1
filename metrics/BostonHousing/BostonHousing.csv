@@ -1,0 +1,67 @@
+MSE_train,MSE_test,R2_train,R2_test
+20.057053939548414,30.50017640105893,0.7648872489912191,0.6266763285024717
+,,,
+chua feature engineering,,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+20.533291138875395,32.38896514156371,0.7593047024016772,0.6035574606632694
+,,,
+xoa bien rad do da cong tuyen voi tax (feature selection),,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+20.478596098620073,31.341763531492244,0.7599458484752593,0.616375260295944
+,,,
+xoa bien tax (feature selection),,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+20.558960636376028,31.97746333429637,0.7590037994778193,0.6085942631885026
+,,,
+pca bien tax va rad thanh 1 bien (PCA),,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+17.400759251891817,18.342686196425767,0.6929005032359077,0.6927638752022396
+,,,
+"xoa cac outlier cua rm, ptratio (trimming)",,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+19.967353027799856,31.367128014914623,0.7659387408101455,0.6160647977611584
+,,,
+ep cac outlier ve muc tran Q3 + 1.5 x IQR hoac Q1 - 1.5 x IQR,,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+20.504188286189347,30.907809554860904,0.7596458517936988,0.6216868784874814
+,,,
+nhi phan hoa bien zn,,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+16.674796972082973,29.0419778880192,0.8045347337432754,0.6445247506067231
+log transform len bien price,,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+15.944536503158883,27.06068868551574,0.8130949913124671,0.6687758286874166
+,,,
+"log transform cho bien crim, lstat",,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+5.839287082320586,10.846527570606792,0.9315507225541548,0.8672379647116563
+,,,
+log transform + binning cho bien price (ko danh gia do data leakage),,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+7.742738510557482,8.905925856567876,0.9092380886522267,0.890991025916058
+,,,
+binning cho bien price (khong danh gia do data leakage),,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+14.080119518673564,17.810882781039837,0.7515052328482266,0.7016714702375417
+"ket hop log transform bien price, crim, lstat; trimming cho rm, ptratio; xoa bo bien tax",,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+9.529024016386938,10.263479301056229,0.7948393817041941,0.7277560135982066
+"ket hop log transform bien price, crim, lstat; trimming cho rm, ptratio; xoa bo bien tax, binarization bien zn.",,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+10.21177809099894,10.324880189162702,0.7801396340857082,0.7261273239446896
+,,,
+"ket hop log transform bien price, crim, lstat; trimming cho rm, ptratio; xoa bo bien tax, binarization bien zn, xoa bo bien rad.
+",,,

@@ -1,0 +1,43 @@
+MSE_train,MSE_test,R2_train,R2_test
+1.184815761912403,0.9393751663760219,0.6728497453554538,0.6956489291232415
+,,,
+dummy encoding va one-hot encoding,,,
+,,,
+(ke tu day dung one-hot encoding),,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+1.147233449468669,0.8584649599693811,0.6832269394149362,0.7218632776031155
+,,,
+log transform cho bien price va area,,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+1.1922447780603327,0.9366845997576566,0.6707984521479506,0.6965206541388429
+,,,
+binarization yes/no thanh 1/0 va label encoder furnished/semi/unfurnished thanh 2/1/0,,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+1.147233449468669,0.8584649599693811,0.6832269394149362,0.7218632776031155
+,,,
+log transform cho moi bien price,,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+1.0833903839876577,0.9392841925809537,0.6924531823260186,0.7053684066393463
+,,,
+trim gia tri > 14000 cua bien area ,,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+1.0643308864534775,1.0964804454776556,0.6978636861478514,0.6560596001810839
+,,,
+"cap va group cac bien bedrooms, bathrooms, stories, parking",,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+1.2116446608624016,1.076131647339187,0.6654417740864373,0.6513407731060369
+,,,
+"tao 1 bien moi la area x prefarea, capping cacsbien bedrooms, bathrooms, stories, parking",,,
+,,,
+MSE_train,MSE_test,R2_train,R2_test
+1.1848157619124031,0.9393751663760224,0.6728497453554538,0.6956489291232413
+,,,
+tao 1 bien moi = cong don tat ca bien nhan gia tri 0/1,,,
+,,,
+KL: Mo hinh da dat den gioi han. ,,,
