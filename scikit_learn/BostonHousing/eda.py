@@ -9,28 +9,76 @@ def read_data():
     return df
 
 
-# Bieu do cot (histogram) cho bien 'price'
+# Histogram cho tất cả biến quan trọng
 def histogram():
     # Đọc dữ liệu
     df = read_data()
 
-    # Vẽ histogram + KDE
-    plt.figure(figsize=(8,5))
-    sns.histplot(df["price"], kde=True)
+    important_cols = [
+        "crim", "zn", "indus", "chas", "nox", "rm",
+        "age", "dis", "rad", "tax", "ptratio",
+        "lstat", "price"
+    ]
 
-    # Vẽ đường mean
-    plt.axvline(x=df["price"].mean(), color='red', linestyle='--', linewidth=2, label='Mean')
+    # Tạo layout subplot
+    fig, axes = plt.subplots(4, 4, figsize=(18, 12))
+    axes = axes.flatten()
 
-    # Label
-    plt.title("Phân phối giá nhà (Price)")
-    plt.xlabel("Price")
-    plt.ylabel("Tần suất")
-    plt.legend()
+    # Vẽ histogram cho từng biến
+    for i, col in enumerate(important_cols):
 
-    # Luu file
-    plt.savefig("histogram.png", dpi=300, bbox_inches='tight')
+        sns.histplot(
+            df[col],
+            kde=True,
+            bins=20,
+            ax=axes[i],
+            color='skyblue'
+        )
+
+        # Mean line
+        axes[i].axvline(
+            x=df[col].mean(),
+            color='red',
+            linestyle='--',
+            linewidth=2,
+            label='Mean'
+        )
+
+        # Title + labels
+        axes[i].set_title(
+            f"Histogram of {col}",
+            fontsize=11,
+            fontweight='bold'
+        )
+
+        axes[i].set_xlabel(col)
+        axes[i].set_ylabel("Frequency")
+
+        axes[i].legend(fontsize=8)
+
+    # Ẩn subplot dư
+    for i in range(len(important_cols), len(axes)):
+        axes[i].set_visible(False)
+
+    # Tiêu đề tổng
+    fig.suptitle(
+        "Histogram of Boston Housing Features",
+        fontsize=16,
+        fontweight='bold',
+        y=1.02
+    )
+
+    plt.tight_layout()
+
+    # Lưu file
+    fig.savefig(
+        "all_histograms.png",
+        dpi=300,
+        bbox_inches='tight'
+    )
 
     plt.show()
+
 
 
 # Heatmap tương quan giữa các biến
@@ -60,11 +108,11 @@ def boxplot():
     df = read_data()
 
     important_num_cols = [
-        "crim", "zn", "indus", "nox", "rm",
-        "age", "dis", "tax", "ptratio", "lstat", "price"
+        "crim", "zn", "indus","chas", "nox", "rm",
+        "age", "dis","rad", "tax", "ptratio", "lstat", "price"
     ]
 
-    fig, axes = plt.subplots(3, 4, figsize=(18,8))
+    fig, axes = plt.subplots(4, 4, figsize=(18,12))
     axes = axes.flatten()
 
     for i, col in enumerate(important_num_cols):
@@ -90,10 +138,13 @@ def scatter_plot():
     # Đọc dữ liệu
     df = pd.read_csv("BostonHousing.csv")
 
-    important_cols = ["crim", "zn", "indus", "nox", "rm",
-                    "age", "dis", "tax", "ptratio", "lstat"]
+    important_cols = [
+        "crim", "zn", "indus","chas", "nox", "rm",
+        "age", "dis","rad", "tax", "ptratio", "lstat", "price"
+    ]
 
-    fig, axes = plt.subplots(3, 4, figsize=(18,10))
+     # Tạo layout subplot
+    fig, axes = plt.subplots(4, 4, figsize=(18, 12))
     axes = axes.flatten()
 
     for i, col in enumerate(important_cols):

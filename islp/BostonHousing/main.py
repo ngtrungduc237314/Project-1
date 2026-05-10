@@ -106,7 +106,7 @@ with open("one_se_features.txt", "w") as f:
 print("Đã lưu file one_se_features.txt")
 
 # =========================
-# 7. TÍNH RSE, R2
+# 7. TÍNH RSE, R2 (RSE^2 = MSE) CHO TỪNG MODEL
 # =========================
 results = []
 
@@ -122,11 +122,11 @@ for step in range(n_steps):
     R2 = 1 - RSS / TSS
     
     results.append({
-        "step": step,
-        "in_sample_MSE": insample_mse[step],
-        "cv_MSE": cv_mean[step],
-        "RSE": RSE,
-        "R2": R2
+        "step": step, # số biến trong model = step + 1
+        "in_sample_MSE": insample_mse[step], # MSE tren tap train cua fold k
+        "cv_MSE": cv_mean[step], # cv_MSE = (MSE1 + MSE2 + ... + MSEK) / K voi MSEk la MSE tren tap test cua fold k
+        "RSE": RSE, #
+        "R2": R2 
     })
 
 results_df = pd.DataFrame(results)
@@ -173,3 +173,5 @@ mse_fig.savefig("mse_plot.png", dpi=300, bbox_inches='tight')
 print("Đã lưu file mse_plot.png")
 
 plt.show()
+
+# cu moi lan them 1 bien doc lap thi phai danh gia lai RSE va R2 de xem co tang hay khong, neu tang thi co the xem model co tot hon khong.

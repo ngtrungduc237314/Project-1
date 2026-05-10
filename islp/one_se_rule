@@ -1,0 +1,13 @@
+B1: Chon cv_mse nho nhat, dat la cv_min, tai step t
+Gia dinh co k fold, cv_mse tren fold i la cv_mse_i
+
+B2: Tinh SE tai step t: 
+S^2 = 1/n * tong (cv_mse_i - cv_min)^2 (chinh la phuong sai tren toan bo k fold)
+SE = sqrt (S^2 / n) (do lech chuan trung binh cua cv_mse tren moi fold)
+
+B3: Tinh nguong threshold: 
+threshold = cv_min + SE 
+
+B4: Chon step nho nhat ma co cv_mse <= threshold, goi la step_min. So bien khi do la step_min.
+
+Tuy theo chien luoc stepwise, ta co duoc step_min feature. 

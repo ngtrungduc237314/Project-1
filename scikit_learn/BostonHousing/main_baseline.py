@@ -23,6 +23,7 @@ print(data.head())
 # 3. Feature & target
 # =========================
 X = data.drop('price', axis=1)
+
 y = data['price']
 
 feature_names = X.columns
