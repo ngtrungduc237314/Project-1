@@ -12,7 +12,7 @@ os.makedirs("validation_results", exist_ok=True)
 # 2. READ DATA
 # ==================================================
 
-df = pd.read_csv("house_data.csv")
+df = pd.read_csv("Housing.csv")
 
 print("=" * 70)
 print("HOUSE DATA QUALITY VALIDATION")

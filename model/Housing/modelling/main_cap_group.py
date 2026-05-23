@@ -11,9 +11,38 @@ from sklearn.compose import ColumnTransformer
 # =========================
 # 1. Load data
 # =========================
-data = pd.read_csv('house_data.csv')
+data = pd.read_csv('Housing.csv')
 
-# Chuyển price sang đơn vị TRIỆU VND
+# =========================
+# 2. TRIMMING OUTLIERS (area > 14000)
+# =========================
+print(f"Before trimming: {data.shape}")
+data = data[data['area'] <= 14000]
+print(f"After trimming: {data.shape}")
+
+# =========================
+# 3. CAP + GROUPING FIXED
+# =========================
+
+# bedrooms
+data['bedrooms'] = data['bedrooms'].clip(upper=5).astype(str)
+data['bedrooms'] = data['bedrooms'].replace('5', '5+')
+
+# bathrooms
+data['bathrooms'] = data['bathrooms'].clip(upper=3).astype(str)
+data['bathrooms'] = data['bathrooms'].replace('3', '3+')
+
+# stories
+data['stories'] = data['stories'].clip(upper=3).astype(str)
+data['stories'] = data['stories'].replace('3', '3+')
+
+# parking
+data['parking'] = data['parking'].clip(upper=3).astype(str)
+data['parking'] = data['parking'].replace('3', '3+')
+
+# =========================
+# 4. Convert price
+# =========================
 data['price'] = data['price'] / 1e6
 
 # Log transform
@@ -23,7 +52,7 @@ data['area'] = np.log(data['area'])
 print(data.head())
 
 # =========================
-# 2. Feature & target
+# 5. Feature & target
 # =========================
 categorical_cols = [
     'mainroad',
@@ -32,21 +61,28 @@ categorical_cols = [
     'hotwaterheating',
     'airconditioning',
     'prefarea',
-    'furnishingstatus'
+    'furnishingstatus',
+    'bedrooms',
+    'bathrooms',
+    'stories',
+    'parking'
 ]
 
 X = data.drop('price', axis=1)
 y = data['price']
 
 # =========================
-# 3. Train-test split
+# 6. Train-test split
 # =========================
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, random_state=0
+    X,
+    y,
+    test_size=0.25,
+    random_state=0
 )
 
 # =========================
-# 4. Preprocessing
+# 7. Preprocessing
 # =========================
 preprocessor = ColumnTransformer(
     transformers=[
@@ -59,20 +95,20 @@ X_train = preprocessor.fit_transform(X_train)
 X_test = preprocessor.transform(X_test)
 
 # =========================
-# 5. Standardize
+# 8. Standardize
 # =========================
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
 # =========================
-# 6. Train model
+# 9. Train model
 # =========================
 model = LinearRegression()
 model.fit(X_train, y_train)
 
 # =========================
-# 7. Predict (log -> exp)
+# 10. Predict (log -> exp)
 # =========================
 y_train_pred_log = model.predict(X_train)
 y_test_pred_log = model.predict(X_test)
@@ -84,7 +120,7 @@ y_train_actual = np.exp(y_train)
 y_test_actual = np.exp(y_test)
 
 # =========================
-# 8. Evaluate
+# 11. Evaluate
 # =========================
 MSE_train = mean_squared_error(y_train_actual, y_train_pred)
 R2_train = r2_score(y_train_actual, y_train_pred)
@@ -99,7 +135,7 @@ print(f"R2_train : {R2_train:.3f}")
 print(f"R2_test  : {R2_test:.3f}")
 
 # =========================
-# 9. Actual vs Predicted
+# 12. Actual vs Predicted
 # =========================
 plt.figure(figsize=(8, 6))
 plt.scatter(y_test_actual, y_test_pred, alpha=0.6)
@@ -111,13 +147,14 @@ plt.plot([min_val, max_val], [min_val, max_val], '--', color='red')
 
 plt.xlabel("Actual Price (million VND)")
 plt.ylabel("Predicted Price (million VND)")
-plt.title("Actual vs Predicted")
+plt.title("Actual vs Predicted (with cap/group features)")
+
 plt.tight_layout()
 plt.savefig("actual_vs_predicted.png", dpi=300)
 plt.show()
 
 # =========================
-# 10. Standardized Residual Plot
+# 13. Standardized Residual Plot
 # =========================
 residuals = y_test_actual - y_test_pred
 sigma = np.sqrt(mean_squared_error(y_test_actual, y_test_pred))
@@ -133,12 +170,13 @@ plt.axhline(-2, linestyle='--', color='gray')
 plt.xlabel("Predicted Price (million VND)")
 plt.ylabel("Standardized Residual")
 plt.title("Standardized Residual Plot")
+
 plt.tight_layout()
 plt.savefig("standardized_residual_plot.png", dpi=300)
 plt.show()
 
 # =========================
-# 11. Save results
+# 14. Save results
 # =========================
 results = pd.DataFrame({
     'Actual_million_VND': y_test_actual,

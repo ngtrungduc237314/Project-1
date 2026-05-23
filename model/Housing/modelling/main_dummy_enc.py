@@ -11,7 +11,7 @@ from sklearn.preprocessing import StandardScaler
 # =========================
 # 1. Load data
 # =========================
-data = pd.read_csv('house_data.csv')
+data = pd.read_csv('Housing.csv')
 
 # CHIA PRICE CHO 10^6
 data['price'] = data['price'] / 1e6

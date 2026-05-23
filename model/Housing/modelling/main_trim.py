@@ -11,18 +11,30 @@ from sklearn.compose import ColumnTransformer
 # =========================
 # 1. Load data
 # =========================
-data = pd.read_csv('house_data.csv')
+data = pd.read_csv('Housing.csv')
 
 # =========================
-# 2. Convert price (million VND) + LOG ONLY PRICE
+# 2. TRIMMING OUTLIERS (area > 14000)
+# =========================
+print(f"Before trimming: {data.shape}")
+
+data = data[data['area'] <= 14000]
+
+print(f"After trimming: {data.shape}")
+
+# =========================
+# 3. Convert price to million VND
 # =========================
 data['price'] = data['price'] / 1e6
-data['price'] = np.log(data['price'])   # chỉ log price
+
+# Log transform
+data['price'] = np.log(data['price'])
+data['area'] = np.log(data['area'])
 
 print(data.head())
 
 # =========================
-# 3. Feature & target
+# 4. Feature & target
 # =========================
 categorical_cols = [
     'mainroad',
@@ -38,7 +50,7 @@ X = data.drop('price', axis=1)
 y = data['price']
 
 # =========================
-# 4. Train-test split
+# 5. Train-test split
 # =========================
 X_train, X_test, y_train, y_test = train_test_split(
     X,
@@ -48,7 +60,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # =========================
-# 5. Preprocessing
+# 6. Preprocessing
 # =========================
 preprocessor = ColumnTransformer(
     transformers=[
@@ -61,20 +73,20 @@ X_train = preprocessor.fit_transform(X_train)
 X_test = preprocessor.transform(X_test)
 
 # =========================
-# 6. Standardize
+# 7. Standardize
 # =========================
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
 # =========================
-# 7. Train model
+# 8. Train model
 # =========================
 model = LinearRegression()
 model.fit(X_train, y_train)
 
 # =========================
-# 8. Predict (inverse log)
+# 9. Predict (log -> exp)
 # =========================
 y_train_pred_log = model.predict(X_train)
 y_test_pred_log = model.predict(X_test)
@@ -86,7 +98,7 @@ y_train_actual = np.exp(y_train)
 y_test_actual = np.exp(y_test)
 
 # =========================
-# 9. Evaluate
+# 10. Evaluate
 # =========================
 MSE_train = mean_squared_error(y_train_actual, y_train_pred)
 R2_train = r2_score(y_train_actual, y_train_pred)
@@ -101,7 +113,7 @@ print(f"R2_train : {R2_train:.3f}")
 print(f"R2_test  : {R2_test:.3f}")
 
 # =========================
-# 10. Actual vs Predicted
+# 11. Actual vs Predicted
 # =========================
 plt.figure(figsize=(8, 6))
 plt.scatter(y_test_actual, y_test_pred, alpha=0.6)
@@ -113,14 +125,14 @@ plt.plot([min_val, max_val], [min_val, max_val], '--', color='red')
 
 plt.xlabel("Actual Price (million VND)")
 plt.ylabel("Predicted Price (million VND)")
-plt.title("Actual vs Predicted (log(price) model)")
+plt.title("Actual vs Predicted")
 
 plt.tight_layout()
 plt.savefig("actual_vs_predicted.png", dpi=300)
 plt.show()
 
 # =========================
-# 11. Standardized Residual Plot
+# 12. Standardized Residual Plot
 # =========================
 residuals = y_test_actual - y_test_pred
 sigma = np.sqrt(mean_squared_error(y_test_actual, y_test_pred))
@@ -142,7 +154,7 @@ plt.savefig("standardized_residual_plot.png", dpi=300)
 plt.show()
 
 # =========================
-# 12. Save results
+# 13. Save results
 # =========================
 results = pd.DataFrame({
     'Actual_million_VND': y_test_actual,
@@ -153,9 +165,6 @@ results = pd.DataFrame({
 
 results.to_csv('predictions.csv', index=False)
 
-# =========================
-# 13. Save metrics
-# =========================
 metrics = pd.DataFrame({
     'MSE_train': [MSE_train],
     'MSE_test': [MSE_test],

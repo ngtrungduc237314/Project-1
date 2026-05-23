@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
@@ -11,61 +12,40 @@ from sklearn.compose import ColumnTransformer
 # =========================
 # 1. Load data
 # =========================
-data = pd.read_csv('house_data.csv')
+data = pd.read_csv('Housing.csv')
 
 # =========================
-# 2. TRIMMING OUTLIERS (area > 14000)
-# =========================
-print(f"Before trimming: {data.shape}")
-data = data[data['area'] <= 14000]
-print(f"After trimming: {data.shape}")
-
-# =========================
-# 3. CAP + GROUPING FIXED
-# =========================
-
-# bedrooms
-data['bedrooms'] = data['bedrooms'].clip(upper=5).astype(str)
-data['bedrooms'] = data['bedrooms'].replace('5', '5+')
-
-# bathrooms
-data['bathrooms'] = data['bathrooms'].clip(upper=3).astype(str)
-data['bathrooms'] = data['bathrooms'].replace('3', '3+')
-
-# stories
-data['stories'] = data['stories'].clip(upper=3).astype(str)
-data['stories'] = data['stories'].replace('3', '3+')
-
-# parking
-data['parking'] = data['parking'].clip(upper=3).astype(str)
-data['parking'] = data['parking'].replace('3', '3+')
-
-# =========================
-# 4. Convert price
+# 2. Convert price
 # =========================
 data['price'] = data['price'] / 1e6
 
-# Log transform
-data['price'] = np.log(data['price'])
-data['area'] = np.log(data['area'])
-
-print(data.head())
-
 # =========================
-# 5. Feature & target
+# 3. Encode binary features
 # =========================
-categorical_cols = [
+binary_cols = [
     'mainroad',
     'guestroom',
     'basement',
     'hotwaterheating',
     'airconditioning',
-    'prefarea',
-    'furnishingstatus',
-    'bedrooms',
-    'bathrooms',
-    'stories',
-    'parking'
+    'prefarea'
+]
+
+for col in binary_cols:
+    data[col] = data[col].map({'yes': 1, 'no': 0})
+
+# =========================
+# 4. CREATE "ĐỘ XỊN" FEATURE
+# =========================
+data['luxury_score'] = data[binary_cols].sum(axis=1)
+
+print(data[binary_cols + ['luxury_score']].head())
+
+# =========================
+# 5. Feature & target
+# =========================
+categorical_cols = [
+    'furnishingstatus'
 ]
 
 X = data.drop('price', axis=1)
@@ -98,6 +78,7 @@ X_test = preprocessor.transform(X_test)
 # 8. Standardize
 # =========================
 scaler = StandardScaler()
+
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
@@ -108,27 +89,21 @@ model = LinearRegression()
 model.fit(X_train, y_train)
 
 # =========================
-# 10. Predict (log -> exp)
+# 10. Predict
 # =========================
-y_train_pred_log = model.predict(X_train)
-y_test_pred_log = model.predict(X_test)
-
-y_train_pred = np.exp(y_train_pred_log)
-y_test_pred = np.exp(y_test_pred_log)
-
-y_train_actual = np.exp(y_train)
-y_test_actual = np.exp(y_test)
+y_train_pred = model.predict(X_train)
+y_test_pred = model.predict(X_test)
 
 # =========================
 # 11. Evaluate
 # =========================
-MSE_train = mean_squared_error(y_train_actual, y_train_pred)
-R2_train = r2_score(y_train_actual, y_train_pred)
+MSE_train = mean_squared_error(y_train, y_train_pred)
+R2_train = r2_score(y_train, y_train_pred)
 
-MSE_test = mean_squared_error(y_test_actual, y_test_pred)
-R2_test = r2_score(y_test_actual, y_test_pred)
+MSE_test = mean_squared_error(y_test, y_test_pred)
+R2_test = r2_score(y_test, y_test_pred)
 
-print("\n===== MODEL PERFORMANCE (million VND) =====")
+print("\n===== MODEL PERFORMANCE =====")
 print(f"MSE_train: {MSE_train:,.2f}")
 print(f"MSE_test : {MSE_test:,.2f}")
 print(f"R2_train : {R2_train:.3f}")
@@ -138,16 +113,16 @@ print(f"R2_test  : {R2_test:.3f}")
 # 12. Actual vs Predicted
 # =========================
 plt.figure(figsize=(8, 6))
-plt.scatter(y_test_actual, y_test_pred, alpha=0.6)
+plt.scatter(y_test, y_test_pred, alpha=0.7)
 
-min_val = min(y_test_actual.min(), y_test_pred.min())
-max_val = max(y_test_actual.max(), y_test_pred.max())
+min_val = min(y_test.min(), y_test_pred.min())
+max_val = max(y_test.max(), y_test_pred.max())
 
-plt.plot([min_val, max_val], [min_val, max_val], '--', color='red')
+plt.plot([min_val, max_val], [min_val, max_val], linestyle='--')
 
-plt.xlabel("Actual Price (million VND)")
-plt.ylabel("Predicted Price (million VND)")
-plt.title("Actual vs Predicted (with cap/group features)")
+plt.xlabel("Actual Price (million)")
+plt.ylabel("Predicted Price (million)")
+plt.title("Actual vs Predicted")
 
 plt.tight_layout()
 plt.savefig("actual_vs_predicted.png", dpi=300)
@@ -156,18 +131,18 @@ plt.show()
 # =========================
 # 13. Standardized Residual Plot
 # =========================
-residuals = y_test_actual - y_test_pred
-sigma = np.sqrt(mean_squared_error(y_test_actual, y_test_pred))
+residuals = y_test - y_test_pred
+sigma = np.sqrt(mean_squared_error(y_test, y_test_pred))
 standardized_residuals = residuals / sigma
 
 plt.figure(figsize=(8, 6))
-plt.scatter(y_test_pred, standardized_residuals, alpha=0.6)
+plt.scatter(y_test_pred, standardized_residuals, alpha=0.7)
 
-plt.axhline(0, linestyle='--', color='red')
-plt.axhline(2, linestyle='--', color='gray')
-plt.axhline(-2, linestyle='--', color='gray')
+plt.axhline(0, color='red', linestyle='--')
+plt.axhline(2, color='gray', linestyle='--')
+plt.axhline(-2, color='gray', linestyle='--')
 
-plt.xlabel("Predicted Price (million VND)")
+plt.xlabel("Predicted Price (million)")
 plt.ylabel("Standardized Residual")
 plt.title("Standardized Residual Plot")
 
@@ -179,10 +154,11 @@ plt.show()
 # 14. Save results
 # =========================
 results = pd.DataFrame({
-    'Actual_million_VND': y_test_actual,
-    'Predicted_million_VND': y_test_pred,
+    'Actual': y_test.values,
+    'Predicted': y_test_pred,
     'Residual': residuals,
-    'Standardized_Residual': standardized_residuals
+    'Standardized_Residual': standardized_residuals,
+    'Luxury_Score': X_test[:, -1]  # optional (scaled version)
 })
 
 results.to_csv('predictions.csv', index=False)
