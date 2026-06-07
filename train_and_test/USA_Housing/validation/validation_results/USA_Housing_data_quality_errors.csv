@@ -1,0 +1,147 @@
+row_index,column,invalid_value,error_type
+90,price,201898.0866,Potential Outlier
+256,price,2298379.487,Potential Outlier
+263,price,152071.8747,Potential Outlier
+355,price,2249122.541,Potential Outlier
+465,price,2469065.594,Potential Outlier
+622,price,2252243.34,Potential Outlier
+693,price,2332110.74,Potential Outlier
+696,price,283208.1322,Potential Outlier
+715,price,2237778.026,Potential Outlier
+901,price,2271112.744,Potential Outlier
+924,price,2330289.701,Potential Outlier
+990,price,2185480.091,Potential Outlier
+1208,price,2198564.573,Potential Outlier
+1248,price,2318285.703,Potential Outlier
+1271,price,31140.51762,Potential Outlier
+1356,price,239319.9342,Potential Outlier
+1459,price,143027.3645,Potential Outlier
+1485,price,2186194.793,Potential Outlier
+1516,price,2220799.069,Potential Outlier
+1536,price,2235294.718,Potential Outlier
+1578,price,211017.9705,Potential Outlier
+1661,price,151527.0826,Potential Outlier
+1799,price,88591.77016,Potential Outlier
+2300,price,2275455.306,Potential Outlier
+2538,price,2294647.784,Potential Outlier
+2719,price,2370231.32,Potential Outlier
+2756,price,231189.821,Potential Outlier
+2795,price,2197436.875,Potential Outlier
+3091,price,268050.8147,Potential Outlier
+3212,price,15938.65792,Potential Outlier
+3502,price,2190338.611,Potential Outlier
+3922,price,266298.8811,Potential Outlier
+4129,price,2187326.443,Potential Outlier
+4400,price,2219724.162,Potential Outlier
+4451,price,253185.7015,Potential Outlier
+12,Avg. Area Income,39033.80924,Potential Outlier
+39,Avg. Area Income,17796.63119,Potential Outlier
+411,Avg. Area Income,36100.44423,Potential Outlier
+558,Avg. Area Income,99629.01358,Potential Outlier
+693,Avg. Area Income,107701.7484,Potential Outlier
+844,Avg. Area Income,39411.65279,Potential Outlier
+962,Avg. Area Income,101928.8581,Potential Outlier
+1096,Avg. Area Income,97548.31041,Potential Outlier
+1271,Avg. Area Income,37971.20757,Potential Outlier
+1459,Avg. Area Income,35963.33081,Potential Outlier
+1597,Avg. Area Income,39294.03652,Potential Outlier
+1734,Avg. Area Income,104702.7243,Potential Outlier
+1891,Avg. Area Income,101144.3239,Potential Outlier
+2025,Avg. Area Income,38139.91904,Potential Outlier
+2092,Avg. Area Income,35608.98624,Potential Outlier
+2242,Avg. Area Income,38868.25031,Potential Outlier
+2300,Avg. Area Income,98468.25364,Potential Outlier
+2597,Avg. Area Income,38734.00522,Potential Outlier
+2719,Avg. Area Income,101599.6706,Potential Outlier
+3069,Avg. Area Income,35454.71466,Potential Outlier
+3144,Avg. Area Income,38571.96367,Potential Outlier
+3183,Avg. Area Income,38122.52449,Potential Outlier
+3483,Avg. Area Income,97881.58728,Potential Outlier
+3541,Avg. Area Income,102881.1209,Potential Outlier
+3798,Avg. Area Income,97669.06449,Potential Outlier
+4087,Avg. Area Income,100741.2986,Potential Outlier
+4400,Avg. Area Income,99317.82315,Potential Outlier
+4449,Avg. Area Income,39777.60691,Potential Outlier
+4716,Avg. Area Income,38530.12448,Potential Outlier
+4744,Avg. Area Income,39653.77003,Potential Outlier
+4844,Avg. Area Income,37908.67586,Potential Outlier
+4855,Avg. Area Income,35797.32312,Potential Outlier
+847,Avg. Area House Age,3.278227596,Potential Outlier
+918,Avg. Area House Age,8.76478554,Potential Outlier
+1074,Avg. Area House Age,2.644304186,Potential Outlier
+1091,Avg. Area House Age,8.991399331,Potential Outlier
+1285,Avg. Area House Age,3.055370327,Potential Outlier
+1494,Avg. Area House Age,3.214868146,Potential Outlier
+1628,Avg. Area House Age,2.683042903,Potential Outlier
+1726,Avg. Area House Age,3.205828407,Potential Outlier
+1777,Avg. Area House Age,8.973440775,Potential Outlier
+1855,Avg. Area House Age,8.688434074,Potential Outlier
+1859,Avg. Area House Age,3.105751238,Potential Outlier
+2366,Avg. Area House Age,3.24171598,Potential Outlier
+2432,Avg. Area House Age,3.144894192,Potential Outlier
+2465,Avg. Area House Age,2.922736153,Potential Outlier
+2898,Avg. Area House Age,9.125282873,Potential Outlier
+3138,Avg. Area House Age,9.008900092,Potential Outlier
+3388,Avg. Area House Age,8.702959652,Potential Outlier
+3831,Avg. Area House Age,3.23205949,Potential Outlier
+3989,Avg. Area House Age,9.519088066,Potential Outlier
+4324,Avg. Area House Age,3.004716836,Potential Outlier
+4429,Avg. Area House Age,3.1188017,Potential Outlier
+4488,Avg. Area House Age,2.797214954,Potential Outlier
+4565,Avg. Area House Age,2.797619027,Potential Outlier
+4859,Avg. Area House Age,8.916092945,Potential Outlier
+4978,Avg. Area House Age,8.899713347,Potential Outlier
+28,Avg. Area Number of Rooms,4.242191302,Potential Outlier
+496,Avg. Area Number of Rooms,3.236194023,Potential Outlier
+1110,Avg. Area Number of Rooms,4.049320548,Potential Outlier
+1423,Avg. Area Number of Rooms,4.129733361,Potential Outlier
+1531,Avg. Area Number of Rooms,9.794898314,Potential Outlier
+1536,Avg. Area Number of Rooms,10.75958834,Potential Outlier
+1757,Avg. Area Number of Rooms,3.969631652,Potential Outlier
+1799,Avg. Area Number of Rooms,3.950972653,Potential Outlier
+2066,Avg. Area Number of Rooms,10.21990198,Potential Outlier
+2503,Avg. Area Number of Rooms,9.841095463,Potential Outlier
+2676,Avg. Area Number of Rooms,9.921519789,Potential Outlier
+2771,Avg. Area Number of Rooms,3.950224687,Potential Outlier
+2963,Avg. Area Number of Rooms,4.198676629,Potential Outlier
+3039,Avg. Area Number of Rooms,9.916528435,Potential Outlier
+3336,Avg. Area Number of Rooms,10.28002242,Potential Outlier
+3466,Avg. Area Number of Rooms,9.926146707,Potential Outlier
+3600,Avg. Area Number of Rooms,4.087718354,Potential Outlier
+3803,Avg. Area Number of Rooms,4.147430722,Potential Outlier
+3806,Avg. Area Number of Rooms,10.02437537,Potential Outlier
+3855,Avg. Area Number of Rooms,10.1449879,Potential Outlier
+3922,Avg. Area Number of Rooms,4.027930716,Potential Outlier
+4318,Avg. Area Number of Rooms,4.12527809,Potential Outlier
+4412,Avg. Area Number of Rooms,4.209620425,Potential Outlier
+4777,Avg. Area Number of Rooms,9.802010414,Potential Outlier
+228,Area Population,69575.44946,Potential Outlier
+314,Area Population,172.6106863,Potential Outlier
+353,Area Population,69553.98833,Potential Outlier
+1234,Area Population,67353.9652,Potential Outlier
+1361,Area Population,63184.61315,Potential Outlier
+1530,Area Population,3285.450538,Potential Outlier
+1595,Area Population,69592.04024,Potential Outlier
+1965,Area Population,64566.68738,Potential Outlier
+2108,Area Population,64543.32245,Potential Outlier
+2173,Area Population,67601.22356,Potential Outlier
+2380,Area Population,64149.68021,Potential Outlier
+2392,Area Population,7522.333138,Potential Outlier
+2422,Area Population,65857.93332,Potential Outlier
+2534,Area Population,4114.489353,Potential Outlier
+2603,Area Population,65184.57847,Potential Outlier
+2756,Area Population,3883.448164,Potential Outlier
+2829,Area Population,6248.75608,Potential Outlier
+2839,Area Population,67701.6498,Potential Outlier
+3120,Area Population,6805.740783,Potential Outlier
+3134,Area Population,66995.47405,Potential Outlier
+3387,Area Population,64180.3708,Potential Outlier
+3442,Area Population,63620.01196,Potential Outlier
+3540,Area Population,6821.950228,Potential Outlier
+3991,Area Population,68311.69582,Potential Outlier
+4182,Area Population,7234.963521,Potential Outlier
+4290,Area Population,7360.295191,Potential Outlier
+4491,Area Population,5727.485885,Potential Outlier
+4684,Area Population,9193.833182,Potential Outlier
+4716,Area Population,67727.22905,Potential Outlier
+4803,Area Population,69621.71338,Potential Outlier

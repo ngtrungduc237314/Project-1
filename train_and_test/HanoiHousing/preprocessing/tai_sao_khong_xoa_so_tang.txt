@@ -1,0 +1,28 @@
+1. Tầm quan trọng cốt lõi của "Số tầng" (Độ độc bản của thông tin)
+Trong thị trường bất động sản Hà Nội, Số tầng là biến số mang thông tin 3D.
+
+Cột Diện tích chỉ cho chúng ta biết mặt sàn 2D (ví dụ 40m2). 
+
+Nhưng một căn nhà 40m2 xây 1 tầng cấp bốn sẽ có giá trị (và tổng diện tích sử dụng) hoàn toàn khác xa một căn nhà 40m2 xây 5 tầng. 
+
+Nếu chúng ta xóa cột Số tầng, thuật toán sẽ bị "mù" hoàn toàn về chiều cao và khối tích của căn nhà, dẫn đến việc dự báo giá bị sai lệch nghiêm trọng.
+
+2. Khả năng khôi phục dữ liệu (Imputability) cực kỳ cao
+
+Không phải dữ liệu khuyết thiếu nào cũng giống nhau:Cột Dài và Rộng bị thiếu là vô phương cứu chữa vì hình dáng mỗi mảnh đất là độc nhất, không thể đoán mò được.
+
+Trái lại, cột Số tầng mang tính quy luật theo cụm (Clustered Logic) rất cao. Dựa vào Loại hình nhà ở, chúng ta hoàn toàn có thể khôi phục (impute) nó với độ chính xác rất cao:
+
+Chung cư: Mặc định số tầng sử dụng luôn là 1.
+
+Nhà ngõ hẻm / Nhà phố: Thường tuân theo quy chuẩn xây dựng chung của Hà Nội là 4 đến 5 tầng.
+
+Việc dùng kỹ thuật groupby theo loại hình rồi lấy median (Trung vị) giúp chúng ta tái tạo lại thông tin cột này một cách cực kỳ hợp lý mà không làm nhiễu mô hình.
+
+3. Nguyên tắc "Bảo toàn thông tin" (Information Redundancy)
+
+Khi chúng ta xóa cột Dài và Rộng, chúng ta thực chất không mất đi quá nhiều thông tin, bởi vì mảnh ghép quan trọng nhất của chúng là $Diện \ tích = Dài \times Rộng$ đã có sẵn ở cột Diện tích rồi.
+
+Nhưng nếu xóa cột Số tầng, chúng ta vĩnh viễn đánh mất đi biến số biểu diễn "diện tích sàn tổng cộng".
+
+Tóm lại: Trong Kỹ nghệ đặc trưng (Feature Engineering), nếu một biến có tầm ảnh hưởng lớn đến kết quả (như Số tầng ảnh hưởng đến Giá) và có tồn tại quy luật logic để điền khuyết an toàn, người kỹ sư dữ liệu luôn phải ưu tiên giữ nó lại để mô hình học được toàn diện nhất.

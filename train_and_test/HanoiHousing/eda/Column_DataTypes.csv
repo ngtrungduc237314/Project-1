@@ -1,0 +1,9 @@
+﻿Tên Cột,Kiểu Dữ Liệu
+Ngày,object
+Quận,object
+Huyện,object
+Loại hình nhà ở,object
+Số tầng,int64
+Số phòng ngủ,int64
+Diện tích,float64
+Gia trieu/m2,float64

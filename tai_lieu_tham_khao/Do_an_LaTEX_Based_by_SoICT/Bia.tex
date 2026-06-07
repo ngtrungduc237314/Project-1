@@ -1,0 +1,44 @@
+\documentclass[DoAn.tex]{subfiles}
+\newcommand{\underwrite}[3][]{% \underwrite[<thickness>]{<numerator>}{<denominator>}
+  \genfrac{}{}{#1}{}{\textstyle #2}{\scriptstyle #3}
+}
+\begin{document}
+\begin{titlepage}
+\thispagestyle{empty}
+% \thisfancypage{
+% \setlength{\fboxsep}{3pt}
+% \fbox}{} 
+\begin{center}
+
+{\textbf{\large{ĐẠI HỌC BÁCH KHOA HÀ NỘI}}}\\[4cm]
+
+{\textbf{\huge{ ĐỒ ÁN TỐT NGHIỆP}}}\\[1cm]
+{\textbf{\Large{Thiết kế xây dựng công nghệ thực tế ảo và ứng dụng}}\\[1cm]
+
+{\textbf{\large{NGUYỄN VĂN A}}}\\
+{\large{nguyenvanabc@sis.hust.edu.vn}}\\[0.5cm]
+
+{\textbf{\large{Chương trình đào tạo: \underline{\hspace{3cm}}
+}}}\\
+{\textbf{\large{Chuyên ngành \underline{\hspace{3cm}}}}}\\ % Mục chuyên ngành tùy thuộc vào Trường/Khoa yêu cầu, có thể cần hoặc không cần. Nếu không cần hãy comment lệnh này.
+
+\vspace{2cm}
+\begin{table}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{ll}
+\multicolumn{1}{c}{\textbf{Giảng viên hướng dẫn:}} & PGS. TS. Phạm Văn ABC \hspace{0.5cm} \underline{\hspace{3cm}}  \\[0.5cm]
+  & \multicolumn{1}{r}{Chữ kí GVHD}     \\[0.5cm]
+\textbf{Khoa:} & \underline{\hspace{3cm}}                \\[0.5cm]
+\textbf{Trường:} & \underline{\hspace{3cm}} \\[5cm]
+\multicolumn{2}{c}{\textbf{HÀ NỘI, 10/2025}}                                            
+\end{tabular}%
+}
+\end{table}}
+\end{center}
+
+
+
+\end{titlepage}
+
+\end{document}
