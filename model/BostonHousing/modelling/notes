@@ -1,4 +1,0 @@
-heatmap: 
-r(rad, tax) = 0.91 > 0.8 => xoa mot trong 2 bien tax hoac rad
-r(tax, price) = -0.47, r(rad, price) = -0.38 => bo rad, giu lai tax
-
